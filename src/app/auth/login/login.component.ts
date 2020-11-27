@@ -11,7 +11,7 @@ import { DataService } from 'src/app/common/services/data.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  submitted = false;
+  isSubmitted = false;
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get f() {
+  get formControls() {
     return this.form.controls;
   }
 
-  loginUser(): void {
+  login(): void {
     if (this.form.status === 'VALID') {
       console.log(this.form.value);
     }
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.submitted = true;
+          this.isSubmitted = true;
           this.toastr.success('User Login Successful');
           localStorage.setItem('token', response.token);
 
