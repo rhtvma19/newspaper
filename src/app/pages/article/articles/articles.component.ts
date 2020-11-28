@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/common/services/api.service';
   styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit {
-
+  articleData: any = {};
   loading = false;
   submitted = false;
   form = this.formBuilder.group({
@@ -77,8 +77,24 @@ export class ArticlesComponent implements OnInit {
           this.router.navigate(['../login'], { relativeTo: this.route });
         },
         (error: any) => {
-          this.toastr.error(error);
-          this.loading = false;
+          // this.toastr.error(error);
+          console.log(error);
         });
   }
+
+
+
+
+  getByID(id: number) {
+    this.apiService.get('/Article/' + id)
+      .subscribe(
+        (data: any) => {
+          this.articleData = data;
+        },
+        (error: any) => {
+          // this.toastr.error(error);
+          console.log(error);
+        });
+  }
+
 }

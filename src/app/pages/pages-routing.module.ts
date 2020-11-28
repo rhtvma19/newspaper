@@ -24,24 +24,39 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
       },
+      // User
       {
         path: 'register',
+        component: RegisterComponent,
+      },
+      {
+        path: 'user-edit/:id',
         component: RegisterComponent,
       },
       {
         path: 'user-list',
         component: UserListComponent,
       },
+      // Article
       {
         path: 'article',
+        component: ArticlesComponent,
+      },
+      {
+        path: 'article-edit/:id',
         component: ArticlesComponent,
       },
       {
         path: 'article-list',
         component: ArticleListComponent,
       },
+      // Tag
       {
         path: 'tag',
+        component: TagComponent,
+      },
+      {
+        path: 'tag-edit/:id',
         component: TagComponent,
       },
       {

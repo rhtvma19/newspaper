@@ -12,6 +12,7 @@ import { DataService } from 'src/app/common/services/data.service';
 })
 export class TagComponent implements OnInit {
 
+  tagData: any = {};
   loading = false;
   submitted = false;
   returnUrl = '';
@@ -62,7 +63,20 @@ export class TagComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
-          this.toastr.error(error.error.message);
+          // this.toastr.error(error);
+          console.log(error);
+        });
+  }
+
+  getByID(id: number) {
+    this.apiService.get('/Tag/' + id)
+      .subscribe(
+        (data: any) => {
+          this.toastr.success('User fetch successfull');
+          this.tagData = data;
+        },
+        (error: any) => {
+          // this.toastr.error(error);
           console.log(error);
         });
   }

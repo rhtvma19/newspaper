@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
-const baseURL = environment.apiUrl;
+const baseURL = environment.apiUrl + '/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,8 @@ export class ApiService {
     return this.httpClient.put(`${`${baseURL}/${URL}`}/${id}`, data);
   }
 
-  delete(URL: string, id: number): Observable<any> {
-    return this.httpClient.delete(`${`${baseURL}/${URL}`}/${id}`);
+  delete(URL: string): Observable<any> {
+    return this.httpClient.delete(`${`${baseURL}/${URL}`}`);
   }
 
   post_dummy(URL: string, data: any): Observable<any> {

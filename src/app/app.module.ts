@@ -10,7 +10,6 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtInterceptor } from './common/services/jwt.interceptor';
-
 @NgModule({
   declarations: [
     AppComponent,
