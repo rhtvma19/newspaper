@@ -29,4 +29,8 @@ export class AuthService {
     this.router.navigate(['/home']);
     this.toastr.success('User Logout Successful');
   }
+
+  userDetail(): string {
+    return JSON.parse(localStorage.getItem('token') || '');
+  }
 }

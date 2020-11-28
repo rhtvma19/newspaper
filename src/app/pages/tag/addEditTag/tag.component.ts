@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/common/services/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/common/services/api.service';
 import { DataService } from 'src/app/common/services/data.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-tag',
+  templateUrl: './tag.component.html',
+  styleUrls: ['./tag.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class TagComponent implements OnInit {
 
   loading = false;
   submitted = false;
   returnUrl = '';
 
-  loginForm = this.formBuilder.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
+  tagForm = this.formBuilder.group({
+    name: ['', Validators.required]
   });
   constructor(
     private formBuilder: FormBuilder,
@@ -40,17 +39,17 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() { return this.tagForm.controls; }
 
 
   onSubmit(): void {
-    if (this.loginForm.status === 'VALID') {
-      console.log(this.loginForm.value);
+    if (this.tagForm.status === 'VALID') {
+      console.log(this.tagForm.value);
     }
 
-    const data = this.loginForm.value;
+    const data = this.tagForm.value;
 
-    this.apiService.post('User/authenticate', data)
+    this.apiService.post('Tag', data)
       .subscribe(
         response => {
           console.log(response);

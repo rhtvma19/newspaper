@@ -1,0 +1,70 @@
+<div class="card">
+  <h4 class="card-header">Create Article</h4>
+  <div class="card-body">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" formControlName="title" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="subtitle">Subtitle</label>
+        <input type="text" formControlName="subtitle" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.subtitle.errors }" />
+        <div *ngIf="submitted && f.subtitle.errors" class="invalid-feedback">
+          <div *ngIf="f.subtitle.errors.required">Subtitle is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="shortsummery">Short summery</label>
+        <input type="text" formControlName="shortsummery" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.shortsummery.errors }" />
+        <div *ngIf="submitted && f.shortsummery.errors" class="invalid-feedback">
+          <div *ngIf="f.shortsummery.errors.required">Shortsummery is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="body">Body</label>
+        <input type="text" formControlName="body" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.body.errors }" />
+        <div *ngIf="submitted && f.body.errors" class="invalid-feedback">
+          <div *ngIf="f.body.errors.required">Body is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tagid">Tag</label>
+        <select formControlName="tagid" class="form-control">
+          <option [value]="role" *ngFor="let role of roles"> {{role.name}}</option>
+        </select>
+        <div *ngIf="submitted && f.tagid.errors" class="invalid-feedback">
+          <div *ngIf="f.tagid.errors.required">Tag is required</div>
+        </div>
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="userid">userid</label>
+
+        <select formControlName="userid" class="form-control">
+          <option [value]="role" *ngFor="let role of roles"> {{role.name}}</option>
+        </select>
+
+        <div *ngIf="submitted && f.userid.errors" class="invalid-feedback">
+          <div *ngIf="f.userid.errors.required">User is required</div>
+        </div>
+      </div> -->
+
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Register
+        </button>
+        <a routerLink="../article-list" class="btn btn-link">Article List</a>
+      </div>
+    </form>
+  </div>
+</div>

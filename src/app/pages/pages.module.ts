@@ -5,15 +5,22 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from '../common/header/header.component';
-import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TagListComponent } from './tag/tag-list/tag-list.component';
+import { ArticleListComponent } from './article/article-list/article-list.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { ArticlesComponent } from './article/articles/articles.component';
+import { TagComponent } from './tag/addEditTag/tag.component';
+import { RegisterComponent } from './user/register/register.component';
 
 
 @NgModule({
   declarations: [PagesComponent, DashboardComponent,
-    RegisterComponent, HeaderComponent],
+    RegisterComponent, HeaderComponent, ArticlesComponent, TagComponent, TagListComponent, ArticleListComponent, UserListComponent],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,9 +1,18 @@
-import { Injectable } from '@angular/core';
+/**
+ *
+ * https://github.com/typicode/json-server#add-custom-routes
+ *
+*/
 
+
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const baseURL = 'http://localhost:5000';
+import { environment } from '../../../environments/environment';
+
+const baseURL = environment.apiUrl;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +35,15 @@ export class ApiService {
 
   delete(URL: string, id: number): Observable<any> {
     return this.httpClient.delete(`${`${baseURL}/${URL}`}/${id}`);
+  }
+
+  post_dummy(URL: string, data: any): Observable<any> {
+    return new Observable(obs => {
+      obs.next({
+        premium: data.age + data.death_sum_insured
+      });
+      obs.complete();
+    });
   }
 
 }
