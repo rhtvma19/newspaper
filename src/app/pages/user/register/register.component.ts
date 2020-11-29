@@ -18,11 +18,12 @@ export class RegisterComponent implements OnInit {
     lastName: ['', Validators.required],
     email: ['', Validators.required],
     username: ['', Validators.required],
+    roleID: [0],
     role: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  countries = [
+  roles = [
     {
       id: '1',
       name: 'admin'
@@ -66,15 +67,21 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    const data = this.form.value;
+    data.role = {
+      id:1,
+      name:'admin'
+    }
     this.loading = true;
-    this.apiService.post('/User', this.form.value)
+    this.apiService.post('User', this.form.value)
       .pipe(first())
       .subscribe(
         (data: any) => {
           this.toastr.success('Registration successful');
-          this.router.navigate(['../login'], { relativeTo: this.route });
+          this.router.navigate(['../user-list'], { relativeTo: this.route });
         },
         (error: any) => {
+          this.loading = false;
           // this.toastr.error(error);
           console.log(error);
         });

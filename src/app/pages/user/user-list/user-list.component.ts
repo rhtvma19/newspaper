@@ -7,60 +7,21 @@ import { ApiService } from 'src/app/common/services/api.service';
 
 
 interface User {
-  UserID: number;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  Username: string;
-  Password: string;
-  RoleID: number;
+  userID: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  roleID: number;
 }
 
-const USERS: User[] = [
-  {
-    UserID: 1,
-    FirstName: 'Rohit',
-    LastName: 'Verma',
-    Email: 'rohit@gmail.com',
-    Username: 'rkv',
-    Password: '123',
-    RoleID: 1
-  },
-  {
-    UserID: 2,
-    FirstName: 'Rohit',
-    LastName: 'Verma',
-    Email: 'rohit@gmail.com',
-    Username: 'rkv',
-    Password: '123',
-    RoleID: 1
-  },
-  {
-    UserID: 3,
-    FirstName: 'Rohit',
-    LastName: 'Verma',
-    Email: 'rohit@gmail.com',
-    Username: 'rkv',
-    Password: '123',
-    RoleID: 1
-  },
-  {
-    UserID: 4,
-    FirstName: 'Rohit',
-    LastName: 'Verma',
-    Email: 'rohit@gmail.com',
-    Username: 'rkv',
-    Password: '123',
-    RoleID: 1
-  }
-];
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users = USERS;
+  users: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -75,7 +36,7 @@ export class UserListComponent implements OnInit {
   }
 
   getAll() {
-    this.apiService.get('/User')
+    this.apiService.get('User')
       .subscribe(
         (data: any) => {
           this.toastr.success('User fetch successfull');
@@ -93,7 +54,7 @@ export class UserListComponent implements OnInit {
 
 
   delete(id: number) {
-    this.apiService.delete('/User/' + id)
+    this.apiService.delete('User/' + id)
       .subscribe(
         (data: any) => {
           this.toastr.success('User Deleted');

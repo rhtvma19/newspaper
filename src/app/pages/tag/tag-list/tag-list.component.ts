@@ -4,35 +4,16 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/common/services/api.service';
 
 interface Tag {
-  TagID: number;
-  Name: string;
+  tagID: number;
+  name: string;
 }
-
-const Tags: Tag[] = [
-  {
-    TagID: 1,
-    Name: 'sports',
-  }, {
-    TagID: 2,
-    Name: 'world',
-  }, {
-    TagID: 3,
-    Name: 'economy',
-  }, {
-    TagID: 4,
-    Name: 'india',
-  }, {
-    TagID: 5,
-    Name: 'continetnal',
-  },
-];
 @Component({
   selector: 'app-tag-list',
   templateUrl: './tag-list.component.html',
   styleUrls: ['./tag-list.component.scss']
 })
 export class TagListComponent implements OnInit {
-  tags = Tags;
+  tags:any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -47,7 +28,7 @@ export class TagListComponent implements OnInit {
   }
 
   getAll() {
-    this.apiService.get('/Tag')
+    this.apiService.get('Tag')
       .subscribe(
         (data: any) => {
           this.toastr.success('Tags fetch successfull');
@@ -65,7 +46,7 @@ export class TagListComponent implements OnInit {
 
 
   delete(id: number) {
-    this.apiService.delete('/Tag/' + id)
+    this.apiService.delete('Tag/' + id)
       .subscribe(
         (data: any) => {
           this.toastr.success('Tag Deleted');

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { GuardService } from '../common/services/auth/guard.service';
 import { ArticleListComponent } from './article/article-list/article-list.component';
 import { ArticlesComponent } from './article/articles/articles.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -32,10 +33,12 @@ const routes: Routes = [
       {
         path: 'user-edit/:id',
         component: RegisterComponent,
+        canActivate:[GuardService]
       },
       {
         path: 'user-list',
         component: UserListComponent,
+        canActivate:[GuardService]
       },
       // Article
       {
@@ -45,6 +48,7 @@ const routes: Routes = [
       {
         path: 'article-edit/:id',
         component: ArticlesComponent,
+        canActivate:[GuardService]
       },
       {
         path: 'article-list',
@@ -61,7 +65,8 @@ const routes: Routes = [
       },
       {
         path: 'tag-list',
-        component: TagListComponent
+        component: TagListComponent,
+        canActivate:[GuardService]
       }
     ]
   }

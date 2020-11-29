@@ -39,11 +39,11 @@
           <label for="role">Role</label>
 
           <select formControlName="role" class="form-control">
-            <option [value]="country" *ngFor="let country of countries"> {{country.name}}</option>
+            <option [value]="role" *ngFor="let role of roles"> {{role.name}}</option>
           </select>
 
           <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
-            <div *ngIf="f.role.errors.required">Role is required</div>
+            <div *ngIf="f.role.errors.required">role is required</div>
           </div>
         </div>
 

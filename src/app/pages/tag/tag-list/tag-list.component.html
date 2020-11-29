@@ -1,6 +1,7 @@
 <div class="card">
   <h4 class="card-header">Tag List</h4>
   <div class="card-body">
+    {{tags|json}}
     <table class="table table-striped">
       <thead>
         <tr>
@@ -11,14 +12,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let tag of tags; index as i">
-          <th scope="row">{{ tag.TagID | number  }}</th>
-          <td>{{ tag.Name  }}</td>
+          <th scope="row">{{ tag.tagID | number  }}</th>
+          <td>{{ tag.name  }}</td>
           <td>
-            <button class="btn btn-primary" (click)="edit(tag.TagID)">
+            <button class="btn btn-primary" (click)="edit(tag.tagID)">
               Edit
             </button>
 
-            <button class="btn btn-danger" (click)="delete(tag.TagID)">
+            <button class="btn btn-danger" (click)="delete(tag.tagID)">
               Delete
             </button>
           </td>

@@ -15,17 +15,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of users; index as i">
-          <th scope="row">{{ user.UserID | number  }}</th>
-          <td>{{ user.FirstName  }}</td>
-          <td>{{ user.LastName }}</td>
-          <td>{{ user.Email  }}</td>
-          <td>{{ user.Username  }}</td>
-          <td>{{ user.RoleID | number }}</td>
+          <th scope="row">{{ user.userID | number  }}</th>
+          <td>{{ user.firstName  }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email  }}</td>
+          <td>{{ user.username  }}</td>
+          <td>{{ user.roleID | number }}</td>
           <td>
-            <button class="btn btn-primary" (click)="edit(user.UserID)">
+            <button class="btn btn-primary" (click)="edit(user.userID)">
               Edit
             </button>
-            <button class="btn btn-danger" (click)="delete(user.UserID)">
+            <button class="btn btn-danger" (click)="delete(user.userID)">
               Delete
             </button>
           </td>

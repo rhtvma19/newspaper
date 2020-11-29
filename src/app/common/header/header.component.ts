@@ -20,8 +20,4 @@ export class HeaderComponent implements OnInit {
     this.dataService.setProfileObs(false);
   }
 
-  openSurvey() {
-    window.location.href = '/#/survey';
-    window.location.reload();
-  }
 }

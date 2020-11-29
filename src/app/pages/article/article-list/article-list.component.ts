@@ -48,7 +48,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   getAll() {
-    this.apiService.get('/Article')
+    this.apiService.get('Article')
       .subscribe(
         (data: any) => {
           this.toastr.success('Tags fetch successfull');
@@ -66,7 +66,7 @@ export class ArticleListComponent implements OnInit {
 
 
   delete(id: number) {
-    this.apiService.delete('/Article/' + id)
+    this.apiService.delete('Article/' + id)
       .subscribe(
         (data: any) => {
           this.toastr.success('Article Deleted');

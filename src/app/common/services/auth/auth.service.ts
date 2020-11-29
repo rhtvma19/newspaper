@@ -14,8 +14,6 @@ export class AuthService {
   // ...
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token') || '';
-    // Check whether the token is expired and return
-    // true or false
     return !this.jwtHelper.isTokenExpired(token);
   }
 
@@ -26,11 +24,16 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
     this.toastr.success('User Logout Successful');
   }
 
-  userDetail(): string {
-    return JSON.parse(localStorage.getItem('token') || '');
+  userDetail() {
+    const token = localStorage.getItem('token') || '';
+    if(token){
+      return token;
+    } else {
+      return  this.router.navigate(['/login']);;
+    }
   }
 }
