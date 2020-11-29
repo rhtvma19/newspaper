@@ -11,7 +11,7 @@ import { ArticleListComponent } from './article/article-list/article-list.compon
 import { UserListComponent } from './user/user-list/user-list.component';
 import { ArticlesComponent } from './article/articles/articles.component';
 import { TagComponent } from './tag/addEditTag/tag.component';
-import { RegisterComponent } from './user/register/register.component';
+import { RegisterComponent } from '../auth/register/register.component';
 
 
 @NgModule({

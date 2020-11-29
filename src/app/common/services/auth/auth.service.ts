@@ -30,10 +30,35 @@ export class AuthService {
 
   userDetail() {
     const token = localStorage.getItem('token') || '';
-    if(token){
+    if (token) {
       return token;
     } else {
-      return  this.router.navigate(['/login']);;
+      return this.router.navigate(['/login']);
+    }
+  }
+
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  getUserInfo(): any {
+    const userToken = this.getToken();
+    if (userToken) {
+      let payload = userToken.split('.')[1];
+      payload = atob(payload);
+      payload = JSON.parse(payload);
+      return payload;
+    }
+    return null;
+  }
+
+  getRole(): string {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      return userInfo['role'] || '';
+    } else {
+      return 'guest';
     }
   }
 }

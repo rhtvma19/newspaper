@@ -7,8 +7,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { TagComponent } from './tag/addEditTag/tag.component';
 import { TagListComponent } from './tag/tag-list/tag-list.component';
-import { RegisterComponent } from './user/register/register.component';
+import { RegisterComponent } from '../auth/register/register.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { Role } from '../common/model/role';
 
 
 const routes: Routes = [
@@ -23,50 +24,59 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
+        canActivate: [GuardService],
         component: DashboardComponent,
       },
       // User
       {
-        path: 'register',
-        component: RegisterComponent,
-      },
-      {
         path: 'user-edit/:id',
         component: RegisterComponent,
-        canActivate:[GuardService]
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'user-list',
         component: UserListComponent,
-        canActivate:[GuardService]
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin] }
       },
       // Article
       {
         path: 'article',
         component: ArticlesComponent,
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin, Role.Journalist] }
       },
       {
         path: 'article-edit/:id',
         component: ArticlesComponent,
-        canActivate:[GuardService]
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin, Role.Journalist] }
       },
       {
         path: 'article-list',
+        canActivate: [GuardService],
         component: ArticleListComponent,
+        data: { roles: [Role.Admin, Role.Journalist] }
       },
       // Tag
       {
         path: 'tag',
         component: TagComponent,
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'tag-edit/:id',
         component: TagComponent,
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'tag-list',
         component: TagListComponent,
-        canActivate:[GuardService]
+        canActivate: [GuardService],
+        data: { roles: [Role.Admin] }
       }
     ]
   }

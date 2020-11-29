@@ -1,3 +1,13 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/pages/dashboard"><img src="../assets/img/logo.png" alt="" width="50"
+      height="50"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+
 <div class="col-md-6 offset-md-3 mt-5">
   <div class="card">
     <h4 class="card-header">Create User</h4>
@@ -62,9 +72,8 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Register
           </button>
-          <a routerLink="../user-list" class="btn btn-link">Users list</a>
+          <a routerLink="/login" class="btn btn-link">login</a>
         </div>
       </form>
     </div>
   </div>
-</div>

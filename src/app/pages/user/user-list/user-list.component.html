@@ -15,12 +15,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of users; index as i">
-          <th scope="row">{{ user.userID | number  }}</th>
+          <th scope="row">{{ user.userID  }}</th>
           <td>{{ user.firstName  }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email  }}</td>
           <td>{{ user.username  }}</td>
-          <td>{{ user.roleID | number }}</td>
+          <td>{{ user.roleID}}</td>
           <td>
             <button class="btn btn-primary" (click)="edit(user.userID)">
               Edit
