@@ -1,7 +1,9 @@
 <div class="col-md-6 offset-md-3 mt-5">
 
   <div class="card">
-    <h4 class="card-header">Create Article</h4>
+    <h4  *ngIf="isAddMode" class="card-header">Create Article</h4>
+    <h4 *ngIf="!isAddMode" class="card-header">Edit Article</h4>
+
     <div class="card-body">
 
       <form [formGroup]="form" (ngSubmit)="onSubmit()">

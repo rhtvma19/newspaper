@@ -14,6 +14,8 @@ export class ArticlesComponent implements OnInit {
   articleData: any = {};
   loading = false;
   submitted = false;
+  id = 0;
+  isAddMode = true;
   form = this.formBuilder.group({
     title: ['', Validators.required],
     subtitle: ['', Validators.required],
@@ -55,7 +57,14 @@ export class ArticlesComponent implements OnInit {
     // }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
+    if (!this.isAddMode) {
+      this.getByID(this.id);
+    }
+  }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
@@ -67,16 +76,40 @@ export class ArticlesComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    if (this.isAddMode) {
+      this.create();
+    } else {
+      this.edit();
+    }
+  }
 
+  create() {
     this.loading = true;
-    this.apiService.post('/Article', this.form.value)
+    this.apiService.post('Article', this.form.value)
       .pipe(first())
       .subscribe(
         (data: any) => {
-          this.toastr.success('Registration successful');
-          this.router.navigate(['../login'], { relativeTo: this.route });
+          this.toastr.success('Article Created successful');
+          this.router.navigate(['../article-list'], { relativeTo: this.route });
         },
         (error: any) => {
+          this.loading = false;
+          // this.toastr.error(error);
+          console.log(error);
+        });
+  }
+
+  edit() {
+    this.loading = true;
+    this.apiService.put('Article', this.form.value, this.id)
+      .pipe(first())
+      .subscribe(
+        (data: any) => {
+          this.toastr.success('Article update successful');
+          this.router.navigate(['../article-list'], { relativeTo: this.route });
+        },
+        (error: any) => {
+          this.loading = false;
           // this.toastr.error(error);
           console.log(error);
         });
@@ -84,12 +117,12 @@ export class ArticlesComponent implements OnInit {
 
 
 
-
   getByID(id: number) {
-    this.apiService.get('/Article/' + id)
+    this.apiService.get('Article/' + id)
       .subscribe(
         (data: any) => {
           this.articleData = data;
+          this.form.patchValue(data);
         },
         (error: any) => {
           // this.toastr.error(error);

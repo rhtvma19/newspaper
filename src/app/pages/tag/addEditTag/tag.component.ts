@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/internal/operators/first';
 import { ApiService } from 'src/app/common/services/api.service';
 import { DataService } from 'src/app/common/services/data.service';
 
@@ -16,6 +17,9 @@ export class TagComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl = '';
+
+  id = 0;
+  isAddMode = true;
 
   tagForm = this.formBuilder.group({
     name: ['', Validators.required]
@@ -35,8 +39,15 @@ export class TagComponent implements OnInit {
   }
 
   ngOnInit() {
-    // get return url from route parameters or default to '/'
+
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
+    if (!this.isAddMode) {
+      this.getByID(this.id);
+    }
   }
 
   // convenience getter for easy access to form fields
@@ -50,30 +61,52 @@ export class TagComponent implements OnInit {
 
     const data = this.tagForm.value;
 
-    this.apiService.post('Tag', data)
+    if (this.isAddMode) {
+      this.create();
+    } else {
+      this.edit();
+    }
+  }
+
+  create() {
+    this.loading = true;
+    this.apiService.post('Tag', this.tagForm.value)
+      .pipe(first())
       .subscribe(
-        response => {
-          console.log(response);
-          this.submitted = true;
-          this.toastr.success('User Login Successful');
-          localStorage.setItem('token', response.token);
-
-          this.dataService.setProfileObs(true);
-
-          this.router.navigate(['/home']);
+        (data: any) => {
+          this.toastr.success('Tag Creation successful');
+          this.router.navigate(['../tag-list'], { relativeTo: this.route });
         },
-        error => {
+        (error: any) => {
+          this.loading = false;
           // this.toastr.error(error);
           console.log(error);
         });
   }
+
+  edit() {
+    this.loading = true;
+    this.apiService.put('tag', this.tagForm.value, this.id)
+      .pipe(first())
+      .subscribe(
+        (data: any) => {
+          this.toastr.success('Tag updated successful');
+          this.router.navigate(['../tag-list'], { relativeTo: this.route });
+        },
+        (error: any) => {
+          this.loading = false;
+          // this.toastr.error(error);
+          console.log(error);
+        });
+  }
+
 
   getByID(id: number) {
     this.apiService.get('/Tag/' + id)
       .subscribe(
         (data: any) => {
           this.toastr.success('User fetch successfull');
-          this.tagData = data;
+          this.tagForm.patchValue(data);
         },
         (error: any) => {
           // this.toastr.error(error);

@@ -13,27 +13,15 @@ interface Article {
   UserID: number;
   ArticleStatusID: boolean;
 }
-
-
-const ARTICLES: Article[] = [
-  {
-    ArticalID: 1,
-    Title: 'Rohit',
-    SubTitle: 'Verma',
-    ShortSummary: 'rohit@gmail.com',
-    Body: 'rkv',
-    TagID: 1,
-    UserID: 1,
-    ArticleStatusID: true
-  }
-];
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
-  articles = ARTICLES;
+  articles: any = {};
+  id = 0;
+  isAddMode = true;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

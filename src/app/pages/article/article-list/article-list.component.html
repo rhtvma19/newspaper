@@ -1,1 +1,29 @@
-<p>article-list works!</p>
+<div class="card">
+  <h4 class="card-header">Tag List</h4>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of articles; index as i">
+          <th scope="row">{{ article.tagID | number  }}</th>
+          <td>{{ article.name  }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="edit(article.tagID)">
+              Edit
+            </button>
+
+            <button class="btn btn-danger" (click)="delete(article.tagID)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
   userData = {};
   loading = false;
   submitted = false;
+  id = 0;
+  isAddMode = true;
   form = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -52,9 +54,18 @@ export class RegisterComponent implements OnInit {
     // if (this.accountService.userValue) {
     //   this.router.navigate(['/']);
     // }
+
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
+    if (!this.isAddMode) {
+      this.getByID(this.id);
+    }
+  }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
@@ -69,9 +80,18 @@ export class RegisterComponent implements OnInit {
 
     const data = this.form.value;
     data.role = {
-      id:1,
-      name:'admin'
+      id: 1,
+      name: 'admin'
     }
+
+    if (this.isAddMode) {
+      this.create();
+    } else {
+      this.edit();
+    }
+  }
+
+  create() {
     this.loading = true;
     this.apiService.post('User', this.form.value)
       .pipe(first())
@@ -87,13 +107,29 @@ export class RegisterComponent implements OnInit {
         });
   }
 
+  edit() {
+    this.loading = true;
+    this.apiService.put('User', this.form.value, this.id)
+      .pipe(first())
+      .subscribe(
+        (data: any) => {
+          this.toastr.success('Registration successful');
+          this.router.navigate(['../user-list'], { relativeTo: this.route });
+        },
+        (error: any) => {
+          this.loading = false;
+          // this.toastr.error(error);
+          console.log(error);
+        });
+  }
 
   getByID(id: number) {
-    this.apiService.get('/User/' + id)
+    this.apiService.get('User/' + id)
       .subscribe(
         (data: any) => {
           this.toastr.success('User fetch successfull');
-          this.userData = data;
+          // this.userData = data;
+          this.form.patchValue(data);
         },
         (error: any) => {
           // this.toastr.error(error);
